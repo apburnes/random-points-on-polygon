@@ -1,0 +1,43 @@
+{
+  "name": "random-points-on-polygon",
+  "version": "0.0.1",
+  "description": "Create N number of random points inside of a polygon",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/apburnes/random-points-on-polygon.git"
+  },
+  "keywords": [
+    "turf",
+    "random",
+    "points",
+    "generate",
+    "inside",
+    "polygon",
+    "geojson",
+    "gis"
+  ],
+  "author": "apburnes <bizzurnzz@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/apburnes/random-points-on-polygon/issues"
+  },
+  "homepage": "https://github.com/apburnes/random-points-on-polygon#readme",
+  "dependencies": {
+    "turf-extent": "^1.0.4",
+    "turf-featurecollection": "^1.0.1",
+    "turf-inside": "^1.1.4",
+    "turf-random": "^1.0.2"
+  },
+  "devDependencies": {
+    "chai": "^3.2.0",
+    "geojsonhint": "^1.1.0",
+    "mocha": "^2.2.5"
+  }
+}
