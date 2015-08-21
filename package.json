@@ -1,6 +1,6 @@
 {
   "name": "random-points-on-polygon",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Create N number of random points inside of a polygon",
   "main": "index.js",
   "directories": {

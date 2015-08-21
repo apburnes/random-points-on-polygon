@@ -18,10 +18,16 @@ var random = require('turf-random');
  * @param {Number} number of points to be generated
  * @param {Feature<(Polygon|MultiPolygon)>} polygon input polygon or multipolygon
  * @param {Object} [properties={}] properties to be appended to the point features
- * @return {FeatureCollection<Points>} a feature collection of the random points inside the polygon
+ * @param {Boolean} [fc=false] if true returns points as a {@link FeatureCollection}
+ * @return {Array} || {FeatureCollection<Points>} an array or feature collection of the random points inside the polygon
 **/
 
-function randomPointsOnPolygon(number, polygon, properties) {
+function randomPointsOnPolygon(number, polygon, properties, fc) {
+  if (typeof properties === 'boolean') {
+    fc = properties;
+    properties = {};
+  }
+
   if (number < 1) {
     return new Error('Number must be >= 1');
   }
@@ -39,13 +45,18 @@ function randomPointsOnPolygon(number, polygon, properties) {
   }
 
   properties = properties || {};
+  fc = fc || false;
   var points = [];
   var bbox = extent(polygon);
   var count = number;
 
   for (var i = 0; i <= number; i++) {
     if (i === number) {
-      return featurecollection(points);
+      if (fc) {
+        return featurecollection(points);
+      }
+
+      return points;
     }
 
     var point = random('point', 1, { bbox: bbox });

@@ -9,15 +9,16 @@ Create _n_ number of random points inside a polygon with [TurfJS](http://turfjs.
 
 ## Usage
 
-#### randomPointsOnPolygon(number, polygon, [properties])
+#### randomPointsOnPolygon(number, polygon, [properties], [fc])
 
 __Params__
 - `number`: Integer - the number of random points generated
 - `polygon`: Feature<(Polygon|MutiPolygon)> - boundary within points are created
 - `properties`: Object [properties={}] - properties object assigned to each random point feature
+- `fc`: Boolean [fc=false] - Default returns an array of point features. When `true`, returns a feature collection of points
 
 __Returns__
-- `points`: FeatureCollection<Points>
+- `points`: Default Array Feature<(Point)> - when `fc` is set to `true` it returns a FeatureCollection<(Points)>
 
 ###### Example
 ```js

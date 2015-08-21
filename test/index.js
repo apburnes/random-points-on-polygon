@@ -13,8 +13,8 @@ var properties = {
 };
 
 describe('random-points-on-polygon', function() {
-  it('should create a set of random points within a polygon', function() {
-    var points = randomPointsOnPolygon(number, polygonFeature, properties);
+  it('should create feature collection of random points within a polygon', function() {
+    var points = randomPointsOnPolygon(number, polygonFeature, properties, true);
 
     expect(points).to.be.an('object');
     expect(geojsonhint.hint(points)).to.be.empty;
@@ -26,12 +26,36 @@ describe('random-points-on-polygon', function() {
   });
 
   it('should create a set of random points within a polygon without properties', function() {
-    var points = randomPointsOnPolygon(number, polygonFeature);
+    var points = randomPointsOnPolygon(number, polygonFeature, true);
 
     expect(points).to.be.an('object');
     expect(geojsonhint.hint(points)).to.be.empty;
     expect(points.features).to.be.length(number);
     return points.features.forEach(function(feature) {
+      expect(inside(feature, polygonFeature)).to.be.true;
+      return expect(feature.properties).to.be.empty;
+    });
+  });
+
+  it('should create array of features of random points within a polygon', function() {
+    var points = randomPointsOnPolygon(number, polygonFeature, properties);
+
+    expect(points).to.be.an('array');
+    expect(points).to.be.length(number);
+    return points.forEach(function(feature) {
+      expect(geojsonhint.hint(feature)).to.be.empty;
+      expect(inside(feature, polygonFeature)).to.be.true;
+      return expect(feature.properties).to.have.property('test', 1);
+    });
+  });
+
+  it('should create an array of features of random points within a polygon without properties', function() {
+    var points = randomPointsOnPolygon(number, polygonFeature);
+
+    expect(points).to.be.an('array');
+    expect(points).to.be.length(number);
+    return points.forEach(function(feature) {
+      expect(geojsonhint.hint(feature)).to.be.empty;
       expect(inside(feature, polygonFeature)).to.be.true;
       return expect(feature.properties).to.be.empty;
     });
