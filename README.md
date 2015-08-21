@@ -30,11 +30,9 @@ var polygon = turf.random('polygon').features[0];
 
 var points = randomPointsOnPolygon(numberOfPoints, polygon);
 
-// points
+// points Array
 
-// {
-//   "type": "FeatureCollection",
-//   "features": [
+//    [
 //     {
 //       "type": "Feature",
 //       "geometry": {
@@ -58,7 +56,7 @@ var points = randomPointsOnPolygon(numberOfPoints, polygon);
 //      },
 //      ...
 //    ]
-//  }
+
 
 
 ```
