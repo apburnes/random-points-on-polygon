@@ -48,10 +48,10 @@ function randomPointsOnPolygon(number, polygon, properties, fc) {
   fc = fc || false;
   var points = [];
   var bbox = extent(polygon);
-  var count = number;
+  var count = Math.round(parseFloat(number));
 
-  for (var i = 0; i <= number; i++) {
-    if (i === number) {
+  for (var i = 0; i <= count; i++) {
+    if (i === count) {
       if (fc) {
         return featurecollection(points);
       }
@@ -62,7 +62,7 @@ function randomPointsOnPolygon(number, polygon, properties, fc) {
     var point = random('point', 1, { bbox: bbox });
 
     if (inside(point.features[0], polygon) === false) {
-      i = i - 1;
+      i = --i;
     }
 
     if (inside(point.features[0], polygon) === true) {

@@ -7,6 +7,7 @@ var random = require('turf-random');
 var randomPointsOnPolygon = require('../');
 
 var number = 10;
+var numberFloat = 20.6;
 var polygonFeature = random('polygon').features[0];
 var properties = {
   test: 1
@@ -25,7 +26,7 @@ describe('random-points-on-polygon', function() {
     });
   });
 
-  it('should create a set of random points within a polygon without properties', function() {
+  it('should create a feature collection random points within a polygon without properties', function() {
     var points = randomPointsOnPolygon(number, polygonFeature, true);
 
     expect(points).to.be.an('object');
@@ -54,6 +55,18 @@ describe('random-points-on-polygon', function() {
 
     expect(points).to.be.an('array');
     expect(points).to.be.length(number);
+    return points.forEach(function(feature) {
+      expect(geojsonhint.hint(feature)).to.be.empty;
+      expect(inside(feature, polygonFeature)).to.be.true;
+      return expect(feature.properties).to.be.empty;
+    });
+  });
+
+  it('should create an array of features of random points by rounding a float', function() {
+    var points = randomPointsOnPolygon(numberFloat, polygonFeature);
+
+    expect(points).to.be.an('array');
+    expect(points).to.be.length(Math.round(numberFloat));
     return points.forEach(function(feature) {
       expect(geojsonhint.hint(feature)).to.be.empty;
       expect(inside(feature, polygonFeature)).to.be.true;
